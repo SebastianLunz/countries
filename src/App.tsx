@@ -1,25 +1,44 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useReducer } from "react";
+import CountryAlbum from "./components/CountryAlbum";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  Theme,
+  ThemeProvider,
+  createMuiTheme,
+  responsiveFontSizes,
+} from "@material-ui/core/styles";
+import { lightTheme, darkTheme } from "./theme/appTheme";
+import { routes } from "./config";
+import RouteItem from "./model/RouteItem.model";
 
 function App() {
+  const [useDefaultTheme, toggleTheme] = useReducer((theme) => !theme, true);
+
+  let theme: Theme = createMuiTheme(useDefaultTheme ? lightTheme : darkTheme);
+  theme = responsiveFontSizes(theme);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <React.Fragment>
+      <ThemeProvider theme={theme}>
+        <Router>
+          <Switch>
+            <CountryAlbum
+              useDefaultTheme={useDefaultTheme}
+              toggleTheme={toggleTheme}
+            >
+              {routes.map((route: RouteItem) => (
+                <Route
+                  key={`${route.key}`}
+                  path={`${route.path}`}
+                  component={route.component}
+                  exact
+                />
+              ))}
+            </CountryAlbum>
+          </Switch>
+        </Router>
+      </ThemeProvider>
+    </React.Fragment>
   );
 }
 
