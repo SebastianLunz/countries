@@ -41,16 +41,18 @@ const Header: FC<ThemeProps> = ({
       <AppBar position="fixed">
         <Toolbar className={classes.toolbar}>
           <div>
-            <Typography
-              variant="h6"
-              color="inherit"
-              noWrap
-              component={RouterLink}
-              to="/"
-              className={classes.homeLink}
-            >
-              Countries of the World
-            </Typography>
+            <Tooltip title="Home Page" placement="bottom">
+              <Typography
+                variant="h6"
+                color="inherit"
+                noWrap
+                component={RouterLink}
+                to="/"
+                className={classes.homeLink}
+              >
+                Countries of the World
+              </Typography>
+            </Tooltip>
           </div>
           <div>
             <IconButton component={RouterLink} to="/about">

@@ -19,7 +19,9 @@ const About: FC<{}> = (): ReactElement => {
           <Typography paragraph>
             Site design is copyright (c) 2021 Sebastian Lunz. Source code is
             available on{" "}
-            <Link href="https://github.com/SebastianLunz">GitHub.</Link>
+            <Link href="https://github.com/SebastianLunz/countries">
+              GitHub.
+            </Link>
           </Typography>
           <Typography component="h2" variant="h2">
             Sources
