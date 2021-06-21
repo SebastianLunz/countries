@@ -78,12 +78,11 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const Countries: FC<{}> = (): ReactElement => {
-  const { countries, error } = useFetch();
+  const url = "https://restcountries.eu/rest/v2/all";
+  const { countries, error } = useFetch(url);
   const [query, setQuery] = useState<string>("");
   const lowerCaseQuery = query.toLowerCase();
   const classes = useStyles();
-
-  console.log(countries);
 
   return (
     <React.Fragment>

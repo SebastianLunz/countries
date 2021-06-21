@@ -3,8 +3,10 @@ import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
-import { CountryProps } from "../../shared/interfaces";
+import { CountryCodeProps } from "../../shared/interfaces";
 import Divider from "@material-ui/core/Divider";
+import { Link as RouterLink } from "react-router-dom";
+import Link from "@material-ui/core/Link";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -24,7 +26,10 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const Geography: FC<CountryProps> = ({ country }): ReactElement => {
+const Geography: FC<CountryCodeProps> = ({
+  country,
+  handleClick,
+}): ReactElement => {
   const classes = useStyles();
 
   return (
@@ -71,7 +76,16 @@ const Geography: FC<CountryProps> = ({ country }): ReactElement => {
         <ListItemText secondary="Land borders" />
         <ListItemText
           primary={country.borders.map((border) => (
-            <span key={border}>{border} </span>
+            <Link
+              key={border}
+              component={RouterLink}
+              to={`${border}`}
+              onClick={() => {
+                handleClick(border);
+              }}
+            >
+              {border}{" "}
+            </Link>
           ))}
           className={classes.mainText}
         />

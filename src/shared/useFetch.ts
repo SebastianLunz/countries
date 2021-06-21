@@ -2,13 +2,11 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { IState } from "./interfaces";
 
-const useFetch = () => {
+const useFetch = (url: string) => {
   const [countries, setCountries] = useState<IState["countries"]>([]);
   const [error, setError] = useState();
 
   useEffect(() => {
-    const url = "https://restcountries.eu/rest/v2/all";
-
     const fetchData = async () => {
       try {
         const response = await axios(url);
@@ -18,7 +16,7 @@ const useFetch = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [url]);
 
   return { countries, error };
 };

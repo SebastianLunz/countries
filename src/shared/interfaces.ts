@@ -13,6 +13,11 @@ export interface CountryProps {
   country: ICountry;
 }
 
+export interface CountryCodeProps {
+  country: ICountry;
+  handleClick: (border: string) => void;
+}
+
 export interface IState {
   countries: ICountry[];
 }
